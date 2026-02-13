@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>广播剧追踪</title>
+  <title>胤禛的广播宇宙</title>
   <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -28,20 +28,159 @@
     const { useState, useMemo } = React;
 
     const initialDramas = [
-      { id: 1, title: "天官赐福", rating: 4.9, male_lead: "花城 / 谢怜", cv: "陈张太康 / 苏尚卿", author: "墨香铜臭", tags: ["古风"], sweetness: "微苦", cleanliness: "双洁", review: "震撼", review_note: "动画 第三季完结", adaptations: ["动画"], ongoing: false, favorited: true, synopsis: "花城与谢怜跨越八百年的爱恋，从天神到鬼王，不离不弃。", cv_list: ["陈张太康", "苏尚卿"] },
-      { id: 2, title: "魔道祖师", rating: 4.6, male_lead: "蓝忘机 / 魏无羡", cv: "边江 / 肖战", author: "墨香铜臭", tags: ["古风"], sweetness: "微苦", cleanliness: "双洁", review: "深沉", review_note: "动画", adaptations: ["动画"], ongoing: false, favorited: true, synopsis: "魏无羡与蓝忘机，乱世中一段荡气回肠的爱情。", cv_list: ["边江", "肖战"] },
-      { id: 3, title: "撒野", rating: 4.7, male_lead: "蒋丞 / 顾飞", cv: "倒霉死勿 / 湛棠", author: "巫哲", tags: ["校园"], sweetness: "苦", cleanliness: "双洁", review: "救赎", review_note: "", adaptations: [], ongoing: false, favorited: false, synopsis: "两个破碎的灵魂在校园里相遇，用爱治愈彼此的伤。", cv_list: ["倒霉死勿", "湛棠"] },
-      { id: 4, title: "某某", rating: 4.6, male_lead: "江添 / 盛望", cv: "钱文青 / 郑希", author: "木苏里", tags: ["校园", "重逢"], sweetness: "甜中苦", cleanliness: "双洁", review: "哭爆", review_note: "", adaptations: [], ongoing: false, favorited: true, synopsis: "一段关于错过与重逢、成长与救赎的校园故事。", cv_list: ["钱文青", "郑希"] },
-      { id: 5, title: "鬒张", rating: 4.3, male_lead: "林无赋 / 丁霁", cv: "胡良伟 / 大昕", author: "巫哲", tags: ["校园"], sweetness: "甜", cleanliness: "双洁", review: "细腻", review_note: "", adaptations: [], ongoing: false, favorited: false, synopsis: "鬒张与丁霁之间细腻的情感成长故事。", cv_list: ["胡良伟", "大昕"] },
-      { id: 6, title: "放学等我", rating: 4.3, male_lead: "陈景深 / 喻繁", cv: "倒霉死勿 / 凌飞", author: "酱子贝", tags: ["校园", "重逢"], sweetness: "甜中苦", cleanliness: "双洁", review: "轻松漂浮", review_note: "", adaptations: [], ongoing: false, favorited: false, synopsis: "放学路上的重逢，两人命运再次交缠。", cv_list: ["倒霉死勿", "凌飞"] },
-      { id: 7, title: "三伏", rating: 4.0, male_lead: "段非凡 / 江闻", cv: "史泽铠 / 张福正", author: "巫哲", tags: ["大学", "校园"], sweetness: "甜", cleanliness: "双洁", review: "牛肉很多 脑洞新奇", review_note: "", adaptations: [], ongoing: false, favorited: false, synopsis: "三伏天里的夏日故事，充满热烈与青涩。", cv_list: ["史泽铠", "张福正"] },
-      { id: 8, title: "判官", rating: 4.2, male_lead: "坐不到 / 闲时", cv: "赵乾业 / 吴香", author: "木苏里", tags: ["古风", "爽逆"], sweetness: "微苦", cleanliness: "双洁", review: "", review_note: "", adaptations: [], ongoing: false, favorited: false, synopsis: "判官与鬼魂之间纠缠的古风故事。", cv_list: ["赵乾业", "吴香"] },
-      { id: 9, title: "全球高考", rating: 4.5, male_lead: "秦究 / ？", cv: "郑希 / 郑知行", author: "木苏里", tags: ["无限流", "快穿系统"], sweetness: "苦", cleanliness: "双洁", review: "", review_note: "", adaptations: [], ongoing: true, favorited: true, synopsis: "高考背景下的无限流故事，生死之间的考验。", cv_list: ["郑希", "郑知行"] },
-      { id: 10, title: "网恋翻车指南", rating: 4.4, male_lead: "向准之 / 景欢", cv: "倒霉死勿 / 颖铭志", author: "酱子贝", tags: ["校园", "电竞"], sweetness: "超甜", cleanliness: "双洁", review: "无脑甜", review_note: "", adaptations: [], ongoing: false, favorited: false, synopsis: "从网恋到现实的甜蜜翻车故事。", cv_list: ["倒霉死勿", "颖铭志"] },
-      { id: 11, title: "我行让我来", rating: 3.6, male_lead: "路旭远 / 简萚", cv: "叶清 / 霍磊", author: "酱子贝", tags: ["电竞"], sweetness: "甜", cleanliness: "双洁", review: "难听", review_note: "", adaptations: [], ongoing: false, favorited: false, synopsis: "电竞圈的爱恨情仇。", cv_list: ["叶清", "霍磊"] },
-      { id: 12, title: "我喜欢你朋友很久了", rating: 4.1, male_lead: "严嵩 / 裴炎", cv: "钱文青 / 史泽铠", author: "酱子贝", tags: ["大学", "校园"], sweetness: "单", cleanliness: "双洁", review: "小谢柠", review_note: "", adaptations: [], ongoing: false, favorited: false, synopsis: "暗恋了很久的朋友，终于鼓起勇气告白。", cv_list: ["钱文青", "史泽铠"] },
-      { id: 13, title: "fog", rating: 4.3, male_lead: "余漩 / 文森", cv: "漫漫何其多 / 马正阳", author: "酱子贝", tags: ["电竞", "重逢"], sweetness: "甜", cleanliness: "双洁", review: "感情细写 细腻热血", review_note: "", adaptations: [], ongoing: false, favorited: false, synopsis: "雾中重逢，两人在电竞赛场重拾往日情缘。", cv_list: ["漫漫何其多", "马正阳"] },
-      { id: 14, title: "PUBG世纪网恋", rating: 3.6, male_lead: "易玮 / 确确", cv: "倒霉死勿 / 柒夜", author: "酱子贝", tags: ["电竞"], sweetness: "甜", cleanliness: "双洁", review: "没更完", review_note: "没更完", adaptations: [], ongoing: true, favorited: false, synopsis: "在PUBG游戏里开始的世纪网恋。", cv_list: ["倒霉死勿", "柒夜"] },
+      { id: 1, title: "天官赐福", rating: 4.9, male_lead: "花城 / 谢怜", cv: "陈张太康 / 苏尚卿", author: "墨香铜臭", tags: ["古风"], sweetness: "微苦", cleanliness: "双洁", review: "鲁迅", ongoing: true, favorited: true, cv_list: ["陈张太康", "苏尚卿"] },
+      { id: 2, title: "魔道祖师", rating: 4.6, male_lead: "蓝忘机 / 魏无羡", cv: "路知行 / 魏超", author: "墨香铜臭", tags: ["古风"], sweetness: "微苦", cleanliness: "双洁", review: "深沉", ongoing: false, favorited: true, cv_list: ["路知行", "魏超"] },
+      { id: 3, title: "撒野", rating: 4.7, male_lead: "顾飞 / 蒋丞", cv: "倒霉死勒 / 涅槃", author: "巫哲", tags: ["校园"], sweetness: "苦", cleanliness: "双洁", review: "救赎", ongoing: false, favorited: true, cv_list: ["倒霉死勒", "涅槃"] },
+      { id: 4, title: "某某", rating: 4.6, male_lead: "江添 / 盛望", cv: "钱文青 / 郑希", author: "木苏里", tags: ["校园", "重逢"], sweetness: "甜中苦", cleanliness: "双洁", review: "哭爆", ongoing: false, favorited: false, cv_list: ["钱文青", "郑希"] },
+      { id: 5, title: "嚣张", rating: 4.3, male_lead: "林无隅 / 丁霁", cv: "胡良伟 / 大昕", author: "巫哲", tags: ["校园"], sweetness: "甜", cleanliness: "双洁", review: "细腻", ongoing: false, favorited: false, cv_list: ["胡良伟", "大昕"] },
+      { id: 6, title: "放学等我", rating: 4.3, male_lead: "陈景深 / 喻繁", cv: "倒霉死勒 / 凌飞", author: "酱子贝", tags: ["校园", "重逢"], sweetness: "甜中苦", cleanliness: "双洁", review: "轻松漂浮", ongoing: false, favorited: true, cv_list: ["倒霉死勒", "凌飞"] },
+      { id: 7, title: "三伏", rating: 4.0, male_lead: "段非凡 / 江阔", cv: "史泽鲲 / 张福正", author: "巫哲", tags: ["大学校园"], sweetness: "甜", cleanliness: "双洁", review: "牛肉过多、脑洞新奇", ongoing: false, favorited: false, cv_list: ["史泽鲲", "张福正"] },
+      { id: 8, title: "判官", rating: 4.2, male_lead: "尘不到 / 闻时", cv: "赵乾景 / 吴磊", author: "木苏里", tags: ["古风", "重逢"], sweetness: "微苦", cleanliness: "双洁", review: "", ongoing: false, favorited: false, cv_list: ["赵乾景", "吴磊"] },
+      { id: 9, title: "全球高考", rating: 4.5, male_lead: "秦究 / 游惑", cv: "郑希 / 路知行", author: "木苏里", tags: ["无限流", "快穿系统"], sweetness: "苦", cleanliness: "双洁", review: "", ongoing: false, favorited: false, cv_list: ["郑希", "路知行"] },
+      { id: 10, title: "网恋翻车指南", rating: 4.4, male_lead: "向淮之 / 景欢", cv: "倒霉死勒 / 袁铭喆", author: "酱子贝", tags: ["校园", "电竞", "搞笑"], sweetness: "超甜", cleanliness: "双洁", review: "无脑甜", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "袁铭喆"] },
+      { id: 11, title: "我行让我来", rating: 3.6, male_lead: "路泊远 / 简茸", cv: "叶清 / 夏磊", author: "酱子贝", tags: ["电竞"], sweetness: "甜", cleanliness: "双洁", review: "难听", ongoing: false, favorited: false, cv_list: ["叶清", "夏磊"] },
+      { id: 12, title: "我喜欢你男朋友很久了", rating: 4.1, male_lead: "严准 / 裴然", cv: "钱文青 / 史泽鲲", author: "酱子贝", tags: ["大学校园"], sweetness: "甜", cleanliness: "单洁", review: "小谢怜", ongoing: false, favorited: false, cv_list: ["钱文青", "史泽鲲"] },
+      { id: 13, title: "fog", rating: 4.3, male_lead: "余邃 / 时洛", cv: "文森 / 马正阳", author: "漫漫何其多", tags: ["电竞", "重逢"], sweetness: "甜", cleanliness: "双洁", review: "感情描写、细腻热血", ongoing: false, favorited: false, cv_list: ["文森", "马正阳"] },
+      { id: 14, title: "PUBG世纪网恋", rating: 3.6, male_lead: "易琛 / 喻延", cv: "倒霉死勒 / 柒夜", author: "酱子贝", tags: ["电竞"], sweetness: "甜", cleanliness: "双洁", review: "总裁文", ongoing: true, favorited: false, cv_list: ["倒霉死勒", "柒夜"] },
+      { id: 15, title: "解药", rating: 4.3, male_lead: "程恪 / 江予夺", cv: "刀疤 / 仲仪", author: "巫哲", tags: ["社会"], sweetness: "甜中苦", cleanliness: "单洁", review: "", ongoing: false, favorited: false, cv_list: ["刀疤", "仲仪"] },
+      { id: 16, title: "竹马难猜", rating: 4.4, male_lead: "赵林苏 / 沈言", cv: "史泽鲲 / 羊仔", author: "冻感超人", tags: ["大学校园", "重逢"], sweetness: "超甜", cleanliness: "双洁", review: "甜甜甜", ongoing: false, favorited: false, cv_list: ["史泽鲲", "羊仔"] },
+      { id: 17, title: "我喜欢你的信息素", rating: 4.4, male_lead: "路星辞 / 段嘉衍", cv: "路知行 / 史泽鲲", author: "引路星", tags: ["ABO"], sweetness: "甜", cleanliness: "双洁", review: "文笔烂   、如坐针毡", ongoing: false, favorited: false, cv_list: ["路知行", "史泽鲲"] },
+      { id: 18, title: "这题超纲了", rating: 4.1, male_lead: "邵湛 / 许盛", cv: "倒霉死勒 / 张福正", author: "木瓜黄", tags: ["校园", "互穿"], sweetness: "甜", cleanliness: "双洁", review: "互换身体、搞笑轻松", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "张福正"] },
+      { id: 19, title: "交易沦陷", rating: 4.4, male_lead: "许少卿 / 安鲤", cv: "贾诩 / 刘明月", author: "在下小神j", tags: ["社会", "年上", "搞笑"], sweetness: "甜", cleanliness: "非洁", review: "搞笑纯情、有声书车", ongoing: false, favorited: true, cv_list: ["贾诩", "刘明月"] },
+      { id: 20, title: "本能游戏", rating: 3.5, male_lead: "江心白 / 杨广生", cv: "袁铭喆 / 路知行", author: "在下小神j", tags: ["社会", "年上"], sweetness: "苦", cleanliness: "单洁", review: "渣男气死、有声书车", ongoing: false, favorited: false, cv_list: ["袁铭喆", "路知行"] },
+      { id: 21, title: "同窗手下留情", rating: 3.5, male_lead: "苏松言 / 景洛", cv: "倒霉死勒 / 袁铭喆", author: "未知", tags: ["古风", "重逢"], sweetness: "甜", cleanliness: "双洁", review: "网翻番外、无聊无脑", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "袁铭喆"] },
+      { id: 22, title: "竹木狼马", rating: 4.6, male_lead: "付坤 / 付一杰", cv: "史泽鲲 / 谷江山", author: "巫哲", tags: ["伪骨科", "年上"], sweetness: "微苦", cleanliness: "双洁", review: "纯爱神仙、细腻感动", ongoing: false, favorited: false, cv_list: ["史泽鲲", "谷江山"] },
+      { id: 23, title: "飞来横犬", rating: 4.2, male_lead: "孙问渠 / 方驰", cv: "史泽鲲 / 金弦", author: "巫哲", tags: ["社会", "年上"], sweetness: "甜", cleanliness: "单洁", review: "细水长流、孙有点淡", ongoing: false, favorited: false, cv_list: ["史泽鲲", "金弦"] },
+      { id: 24, title: "不许装乖", rating: 4.2, male_lead: "宋时寒 / 左陶", cv: "史泽鲲 / 倒霉死勒", author: "路回清野", tags: ["电竞"], sweetness: "甜", cleanliness: "双洁", review: "高配我行、剧情断点", ongoing: true, favorited: false, cv_list: ["史泽鲲", "倒霉死勒"] },
+      { id: 25, title: "落池", rating: 4.3, male_lead: "程飞驰 / 叶钦", cv: "景向谁依 / 倒霉死勒", author: "余酲", tags: ["校园", "社会", "重逢"], sweetness: "微苦", cleanliness: "双洁", review: "假装追求、重逢追夫", ongoing: false, favorited: false, cv_list: ["景向谁依", "倒霉死勒"] },
+      { id: 26, title: "二锅水", rating: 4.3, male_lead: "江初 / 覃最", cv: "谷江山 / 马正阳", author: "烟猫与酒", tags: ["伪骨科", "年上"], sweetness: "微苦", cleanliness: "单洁", review: "细腻       、后面拖沓", ongoing: false, favorited: false, cv_list: ["谷江山", "马正阳"] },
+      { id: 27, title: "穿成阴鸷反派的联姻对象", rating: 4.4, male_lead: "陆焕 / 郁白含", cv: "倒霉死勒 / 刘一鸣", author: "马户子君", tags: ["穿越"], sweetness: "甜", cleanliness: "双洁", review: "巨搞笑", ongoing: true, favorited: false, cv_list: ["倒霉死勒", "刘一鸣"] },
+      { id: 28, title: "本色", rating: 4.5, male_lead: "叶行洲 / 祁醒", cv: "倒霉死勒 / 刘琮", author: "白芥子", tags: ["强制", "年上"], sweetness: "微苦", cleanliness: "非洁", review: "炸毛梅爽", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "刘琮"] },
+      { id: 29, title: "你的距离", rating: 4.2, male_lead: "柏昌意 / 庭霜", cv: "郑希 / 羊仔", author: "公子优", tags: ["师生", "年上"], sweetness: "甜", cleanliness: "非洁", review: "36岁老师、炸毛受   、有思想", ongoing: false, favorited: false, cv_list: ["郑希", "羊仔"] },
+      { id: 30, title: "燎原", rating: 4.5, male_lead: "汤索言 / 陶晓东", cv: "郑希 / 赵毅", author: "不问三九", tags: ["社会"], sweetness: "微甜", cleanliness: "非洁", review: "7集前苦死双cv仙品、受追攻", ongoing: false, favorited: true, cv_list: ["郑希", "赵毅"] },
+      { id: 31, title: "我的怪物", rating: 4.2, male_lead: "Abyss / 王子昕", cv: "郑希 / 羊仔", author: "木火然", tags: ["快穿系统"], sweetness: "甜", cleanliness: "双洁", review: "漫画好看", ongoing: false, favorited: false, cv_list: ["郑希", "羊仔"] },
+      { id: 32, title: "四面佛", rating: 4.4, male_lead: "樊霄 / 游书朗", cv: "赵成晨 / 袁铭喆", author: "苏二两", tags: ["强制"], sweetness: "微苦", cleanliness: "单洁", review: "狗屁不通、神仙渣音cv", ongoing: false, favorited: false, cv_list: ["赵成晨", "袁铭喆"] },
+      { id: 33, title: "狼行成双", rating: 4.0, male_lead: "邱奕 / 边南", cv: "谷江山 / 杨昕燃", author: "巫哲", tags: ["校园"], sweetness: "微苦", cleanliness: "双洁", review: "撒野低配乱七八糟", ongoing: false, favorited: false, cv_list: ["谷江山", "杨昕燃"] },
+      { id: 34, title: "你亲我一下", rating: 3.5, male_lead: "关鹤 / 谢闻星", cv: "张福正 / 谷江山", author: "引路星", tags: ["社会"], sweetness: "甜", cleanliness: "双洁", review: "双向暗恋不说离谱", ongoing: false, favorited: false, cv_list: ["张福正", "谷江山"] },
+      { id: 35, title: "情敌每天都在变美", rating: 4.0, male_lead: "阎秋池 / 沈金台", cv: "倒霉死勒 / 文森", author: "公子于歌", tags: ["穿越", "娱乐圈"], sweetness: "甜", cleanliness: "双洁", review: "全是戏", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "文森"] },
+      { id: 36, title: "飞鸥不下", rating: 3.0, male_lead: "盛珉鸥 / 陆枫", cv: "倒霉死勒 / 景向谁依", author: "回南雀", tags: ["社会"], sweetness: "苦死", cleanliness: "双洁", review: "杀掉舔狗", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "景向谁依"] },
+      { id: 37, title: "碎玉投珠", rating: 4.0, male_lead: "丁汉白 / 纪慎语", cv: "凌飞 / 陈张太康", author: "北南", tags: ["社会", "1990"], sweetness: "甜", cleanliness: "双洁", review: "", ongoing: false, favorited: false, cv_list: ["凌飞", "陈张太康"] },
+      { id: 38, title: "古董下山", rating: 4.0, male_lead: "饕餮 / 貔貅", cv: "倒霉死勒 / 梁达伟", author: "缘和故", tags: ["搞笑"], sweetness: "甜", cleanliness: "双洁", review: "无厘头    、搞笑", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "梁达伟"] },
+      { id: 39, title: "美学公式", rating: 4.0, male_lead: "霍执潇丁以楠", cv: "赵成晨 / 袁铭喆", author: "空菊", tags: ["社会"], sweetness: "甜", cleanliness: "非洁", review: "四面佛番外", ongoing: false, favorited: false, cv_list: ["赵成晨", "袁铭喆"] },
+      { id: 40, title: "三嫁咸鱼", rating: 4.7, male_lead: "陆晚丞 / 林清羽", cv: "陈张太康 / 马正阳", author: "比卡比", tags: ["穿越", "古风"], sweetness: "甜中苦", cleanliness: "双洁", review: "感情细腻、逻辑缜密、爆哭搞笑", ongoing: false, favorited: true, cv_list: ["陈张太康", "马正阳"] },
+      { id: 41, title: "你是什么垃圾", rating: 4.1, male_lead: "江行舟 / 原沅", cv: "张福正 / 大昕", author: "张佩奇", tags: ["大学", "搞笑"], sweetness: "超甜", cleanliness: "双洁", review: "常规甜文", ongoing: false, favorited: false, cv_list: ["张福正", "大昕"] },
+      { id: 42, title: "提灯看刺刀", rating: 4.3, male_lead: "韩越 / 楚慈", cv: "赵成晨 / 姜广涛", author: "淮上", tags: ["社会", "强制"], sweetness: "微苦", cleanliness: "双洁", review: "狗血脑洞、受控宠攻", ongoing: false, favorited: true, cv_list: ["赵成晨", "姜广涛"] },
+      { id: 43, title: "台风眼", rating: 4.4, male_lead: "曹烨 / 梁思喆", cv: "倒霉死勒 / 文森", author: "潭石", tags: ["娱乐圈", "年上"], sweetness: "微苦", cleanliness: "非洁", review: "神仙文笔、曹可爱爆、暗恋宠溺", ongoing: false, favorited: true, cv_list: ["倒霉死勒", "文森"] },
+      { id: 44, title: "同坠", rating: 4.5, male_lead: "岑致森 / 宁知远", cv: "刘一鸣 / 谷江山", author: "白芥子", tags: ["伪骨科"], sweetness: "微苦", cleanliness: "非洁", review: "互钓、cv好听", ongoing: false, favorited: false, cv_list: ["刘一鸣", "谷江山"] },
+      { id: 45, title: "合法违章", rating: 4.0, male_lead: "封路凛 / 风堂", cv: "景向谁依 / 倒霉死勒", author: "罗再说", tags: ["社会"], sweetness: "甜", cleanliness: "单洁", review: "剧情无聊、梅小少爷", ongoing: false, favorited: false, cv_list: ["景向谁依", "倒霉死勒"] },
+      { id: 46, title: "还债", rating: 4.2, male_lead: "闻寻川贺临舟", cv: "轩zone / 赵成晨", author: "奶口卡", tags: ["社会", "搞笑"], sweetness: "超甜", cleanliness: "非洁", review: "两个前任、黏黏糊糊", ongoing: false, favorited: false, cv_list: ["轩zone", "赵成晨"] },
+      { id: 47, title: "霍总让我还他名声", rating: 4.0, male_lead: "霍阑 / 梁宵", cv: "赵成晨 / 倒霉死勒", author: "三千大梦叙平生", tags: ["娱乐圈"], sweetness: "甜", cleanliness: "双洁", review: "对手戏少", ongoing: false, favorited: false, cv_list: ["赵成晨", "倒霉死勒"] },
+      { id: 48, title: "你却爱着一个他", rating: 4.8, male_lead: "李玉 / 简隋英", cv: "孙朗朗 / 史泽鲲", author: "水千丞", tags: ["社会", "年下", "狗血"], sweetness: "微苦", cleanliness: "非洁", review: "狗血流畅、cv好听", ongoing: false, favorited: true, cv_list: ["孙朗朗", "史泽鲲"] },
+      { id: 49, title: "你却爱着一个他", rating: 4.6, male_lead: "李玉 / 简隋英", cv: "吕书君 / 顺子", author: "水千丞", tags: ["社会", "年下", "狗血"], sweetness: "微苦", cleanliness: "非洁", review: "cv更好、细节多", ongoing: false, favorited: true, cv_list: ["吕书君", "顺子"] },
+      { id: 50, title: "欲言难止", rating: 4.0, male_lead: "陆赫扬 / 许则", cv: "顺子 / 倒霉死勒", author: "麦香鸡呢", tags: ["校园"], sweetness: "微苦", cleanliness: "双洁", review: "都淡淡的", ongoing: false, favorited: true, cv_list: ["顺子", "倒霉死勒"] },
+      { id: 51, title: "月下安途", rating: 3.8, male_lead: "谢铎 / 沈安途", cv: "余昊威 / 文森", author: "失效的止疼药", tags: ["社会", "暗恋"], sweetness: "甜", cleanliness: "双洁", review: "人物单薄", ongoing: false, favorited: false, cv_list: ["余昊威", "文森"] },
+      { id: 52, title: "2401", rating: 4.0, male_lead: "石毅 / 英明", cv: "刘琮 / 文森", author: "功夫包子", tags: ["社会", "娱乐圈"], sweetness: "甜", cleanliness: "非洁", review: "双直男、细水长流", ongoing: false, favorited: false, cv_list: ["刘琮", "文森"] },
+      { id: 53, title: "十年对手，一朝占有", rating: 4.1, male_lead: "舒岸 / 聂云深", cv: "赵成晨 / 吴晛", author: "桃千岁", tags: ["社会", "暗恋"], sweetness: "甜", cleanliness: "单洁", review: "剧情断点、cv好听🍎", ongoing: false, favorited: false, cv_list: ["赵成晨", "吴晛"] },
+      { id: 54, title: "好生开车", rating: 4.1, male_lead: "应与将 / 贺情", cv: "赵成晨 / 吴晛", author: "罗再说", tags: ["社会", "年上"], sweetness: "甜", cleanliness: "双洁", review: "微炸毛受", ongoing: false, favorited: false, cv_list: ["赵成晨", "吴晛"] },
+      { id: 55, title: "针锋对决", rating: 4.0, male_lead: "原炀 / 顾青裴", cv: "谷江山 / 金弦", author: "水千丞", tags: ["社会", "狗血"], sweetness: "甜", cleanliness: "非洁", review: "暴躁小狗", ongoing: false, favorited: false, cv_list: ["谷江山", "金弦"] },
+      { id: 56, title: "老男人", rating: 3.8, male_lead: "林野 / 温是安", cv: "张福正 / 刘思岑", author: "坂田小黄", tags: ["社会", "狗血"], sweetness: "微甜", cleanliness: "单洁", review: "人妻短剧", ongoing: false, favorited: false, cv_list: ["张福正", "刘思岑"] },
+      { id: 57, title: "狗情敌", rating: 4.3, male_lead: "贺钦 / 薛恨", cv: "清澈 / 李嘉祥", author: "游客鱼某人", tags: ["社会", "暗恋"], sweetness: "超甜", cleanliness: "双洁", review: "纯爱粘人", ongoing: false, favorited: false, cv_list: ["清澈", "李嘉祥"] },
+      { id: 58, title: "不准跟我说话", rating: 4.4, male_lead: "靳林琨 / 于笙", cv: "续续点灯 / 吴晛", author: "三千大梦叙平生", tags: ["校园"], sweetness: "超甜", cleanliness: "双洁", review: "听第一季", ongoing: false, favorited: false, cv_list: ["续续点灯", "吴晛"] },
+      { id: 59, title: "和直男网恋后我翻车了", rating: 3.9, male_lead: "季言灼夏星鸣", cv: "徐雨豪 / 吴晛", author: "bp", tags: ["大学校园", "网恋", "女装"], sweetness: "微甜", cleanliness: "单洁", review: "设定不好", ongoing: false, favorited: false, cv_list: ["徐雨豪", "吴晛"] },
+      { id: 60, title: "穿成万人迷的炮灰竹马", rating: 4.1, male_lead: "宋喻 / 谢绥", cv: "云惟一 / 吴晛", author: "妾在山阳", tags: ["穿书", "重生"], sweetness: "微苦", cleanliness: "双洁", review: "脑洞大、不狗血", ongoing: false, favorited: false, cv_list: ["云惟一", "吴晛"] },
+      { id: 61, title: "不合", rating: 3.9, male_lead: "楚行 / 季知许", cv: "三石 / 吴晛", author: "NINEZZZZ", tags: ["先婚后爱"], sweetness: "微甜", cleanliness: "双洁", review: "娇妻文学", ongoing: false, favorited: false, cv_list: ["三石", "吴晛"] },
+      { id: 62, title: "没钱装什么啊", rating: 4.1, male_lead: "谢十安 / 陈绍", cv: "顺子 / 吴晛", author: "荒野大烤肉", tags: ["暗恋", "重逢"], sweetness: "微甜", cleanliness: "双洁", review: "蓄谋已久", ongoing: false, favorited: false, cv_list: ["顺子", "吴晛"] },
+      { id: 63, title: "cos0", rating: 4.0, male_lead: "许寄 / 黎听", cv: "马正阳 / 文森", author: "图南鲸", tags: ["先婚后爱"], sweetness: "微苦", cleanliness: "非洁", review: "突然舔狗、cv好剧差", ongoing: false, favorited: false, cv_list: ["马正阳", "文森"] },
+      { id: 64, title: "你克制一点", rating: 4.1, male_lead: "季书言段执", cv: "文森 / 唐国胜", author: "松子茶", tags: ["年下", "暗恋"], sweetness: "甜", cleanliness: "双洁", review: "流水产品", ongoing: false, favorited: false, cv_list: ["文森", "唐国胜"] },
+      { id: 65, title: "刺青", rating: 4.3, male_lead: "周罪 / 萧刻", cv: "吴磊 / 谢添天", author: "不问三九", tags: ["社会", "救赎"], sweetness: "超甜", cleanliness: "非洁", review: "受有魅力", ongoing: false, favorited: false, cv_list: ["吴磊", "谢添天"] },
+      { id: 66, title: "捡星星", rating: 4.4, male_lead: "刑炎 / 秦放", cv: "阿绵 / 张福正", author: "不问三九", tags: ["大学校园", "重逢"], sweetness: "甜中苦", cleanliness: "双洁", review: "cv好听、细腻群像、低开疯走", ongoing: false, favorited: false, cv_list: ["阿绵", "张福正"] },
+      { id: 67, title: "貌合神离", rating: 4.1, male_lead: "季明轩沈默", cv: "刘琮 / 张福正", author: "困倚危楼", tags: ["社会", "暗恋"], sweetness: "甜", cleanliness: "非洁", review: "狗血爽剧", ongoing: false, favorited: false, cv_list: ["刘琮", "张福正"] },
+      { id: 68, title: "安知我意", rating: 3.9, male_lead: "戚时安沈多意", cv: "赵成晨 / 胡良伟", author: "北南", tags: ["社会", "暗恋"], sweetness: "甜", cleanliness: "双洁", review: "流水产品、比较无聊", ongoing: false, favorited: false, cv_list: ["赵成晨", "胡良伟"] },
+      { id: 69, title: "日暮倚修竹", rating: 4.0, male_lead: "尹修竹齐暮", cv: "吴晛 / 张福正", author: "龙柒", tags: ["校园", "重逢", "暗恋"], sweetness: "甜", cleanliness: "双洁", review: "狗血误会", ongoing: false, favorited: false, cv_list: ["吴晛", "张福正"] },
+      { id: 70, title: "每天起床都能看到男朋友在保养", rating: 3.5, male_lead: "褚雁罗 常曼", cv: "赵成晨 / 风允之", author: "洛", tags: ["社会", "搞笑"], sweetness: "甜", cleanliness: "双洁", review: "无厘头", ongoing: false, favorited: false, cv_list: ["赵成晨", "风允之"] },
+      { id: 71, title: "别读博，会脱单", rating: 4.2, male_lead: "边城 / 闻迪", cv: "魏超 / 倒霉死勒", author: "LIosa", tags: ["大学校园", "搞笑"], sweetness: "甜", cleanliness: "单洁", review: "有思想", ongoing: false, favorited: false, cv_list: ["魏超", "倒霉死勒"] },
+      { id: 72, title: "泥中莲", rating: 3.6, male_lead: "秋山 / 元春", cv: "倒霉死勒 / 商桐", author: "日本人", tags: ["骨科"], sweetness: "微苦", cleanliness: "非洁", review: "两集短篇🍎", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "商桐"] },
+      { id: 73, title: "初三的六一儿童节", rating: 4.3, male_lead: "何初三 / 夏六一", cv: "景向谁依 / 路知行", author: "蛇蝎点点", tags: ["社会", "年下", "搞笑"], sweetness: "甜", cleanliness: "双洁", review: "有点搞笑、绿茶年下", ongoing: true, favorited: false, cv_list: ["景向谁依", "路知行"] },
+      { id: 74, title: "玩物丧志", rating: 4.2, male_lead: "林修承 / 陈幸", cv: "陈冠豪 / 家康", author: "卡比丘", tags: ["伪父子"], sweetness: "甜", cleanliness: "单洁", review: "cv好听、剧情拼接", ongoing: false, favorited: false, cv_list: ["陈冠豪", "家康"] },
+      { id: 75, title: "南方海啸", rating: 4.3, male_lead: "赵竞 / 韦嘉易", cv: "凌飞 / 马洋", author: "卡比丘", tags: ["社会", "搞笑"], sweetness: "超甜", cleanliness: "双洁", review: "非常搞笑、", ongoing: false, favorited: false, cv_list: ["凌飞", "马洋"] },
+      { id: 76, title: "太子", rating: 4.3, male_lead: "咏善 / 咏棋", cv: "马正阳 / 吴晛", author: "风弄", tags: ["伪骨科", "古风"], sweetness: "甜", cleanliness: "双洁", review: "cv好听、强制", ongoing: false, favorited: false, cv_list: ["马正阳", "吴晛"] },
+      { id: 77, title: "暗河长明", rating: 4.2, male_lead: "陆溓宁李琰", cv: "凌飞 / 钱文青", author: "冷山就木", tags: ["社会", "强制"], sweetness: "微苦", cleanliness: "非洁", review: "过于冗余、变态强制", ongoing: false, favorited: false, cv_list: ["凌飞", "钱文青"] },
+      { id: 78, title: "我的病弱老婆", rating: 4.0, male_lead: "穆裴轩 段临舟", cv: "云惟一 / 马洋", author: "花卷", tags: ["古风", "年下"], sweetness: "微苦", cleanliness: "双洁", review: "不轻松、没看完5", ongoing: false, favorited: false, cv_list: ["云惟一", "马洋"] },
+      { id: 79, title: "离婚之后我还穿着你的外套", rating: 3.8, male_lead: "方绍一原野", cv: "涂雄飞 / 乘风归去", author: "不问三九", tags: ["娱乐圈"], sweetness: "甜", cleanliness: "双洁", review: "没看完、题材不喜欢", ongoing: false, favorited: false, cv_list: ["涂雄飞", "乘风归去"] },
+      { id: 80, title: "停电时我被舍友偷亲了", rating: 4.3, male_lead: "闻序 / 宁然", cv: "袁铭喆 / 王宁", author: "总是开会的小刀", tags: ["大学校园", "搞笑"], sweetness: "甜", cleanliness: "双洁", review: "无敌搞笑、短小精悍", ongoing: false, favorited: false, cv_list: ["袁铭喆", "王宁"] },
+      { id: 81, title: "唇间", rating: 4.3, male_lead: "魏予怀 / 楚和", cv: "张福正 / 史泽鲲", author: "顺颂商祺", tags: ["社会", "搞笑"], sweetness: "超甜", cleanliness: "非洁", review: "cv拼盘盛宴、亲亲甜爆了", ongoing: false, favorited: false, cv_list: ["张福正", "史泽鲲"] },
+      { id: 82, title: "凛冬岑寂", rating: 4.1, male_lead: "章洐 / 徐岑安", cv: "刘思岑 / 吴晛", author: "长不出青苔", tags: ["娱乐圈", "188"], sweetness: "微甜", cleanliness: "非洁", review: "cv好听、狗渣男", ongoing: false, favorited: false, cv_list: ["刘思岑", "吴晛"] },
+      { id: 83, title: "Here U Are", rating: 4.2, male_lead: "黎焕 / 虞扬", cv: "倔强的小红 / 吴晛", author: "D君", tags: ["大学校园"], sweetness: "甜", cleanliness: "双洁", review: "现实向", ongoing: false, favorited: false, cv_list: ["倔强的小红", "吴晛"] },
+      { id: 84, title: "天高路远", rating: 4.2, male_lead: "单海鸣 / 萧宁", cv: "赵成晨 / 胡良伟", author: "御小凡", tags: ["社会"], sweetness: "甜", cleanliness: "双洁", review: "短小精悍", ongoing: false, favorited: false, cv_list: ["赵成晨", "胡良伟"] },
+      { id: 85, title: "打完这仗就回家结婚", rating: 4.0, male_lead: "亚瑟 / 燕雪山", cv: "煎饼侠 / 吴晛", author: "寒菽", tags: ["星际"], sweetness: "甜", cleanliness: "双洁", review: "无聊没看完9", ongoing: false, favorited: false, cv_list: ["煎饼侠", "吴晛"] },
+      { id: 86, title: "我乘风雪", rating: 4.3, male_lead: "赵昀 / 裴长淮", cv: "顺子 / 金弦", author: "弃吴钩", tags: ["古风", "重逢"], sweetness: "微苦", cleanliness: "双洁", review: "后期精湛虐、换头失忆🍎", ongoing: false, favorited: false, cv_list: ["顺子", "金弦"] },
+      { id: 87, title: "不安于室", rating: 4.4, male_lead: "温常世喻霁", cv: "彭尧 / 倒霉死勒", author: "卡比丘", tags: ["社会"], sweetness: "甜", cleanliness: "双洁", review: "爆可爱！", ongoing: false, favorited: false, cv_list: ["彭尧", "倒霉死勒"] },
+      { id: 88, title: "我和我的冤种同桌", rating: 4.2, male_lead: "谢昭 / 贺知许", cv: "陈冠豪 / 倒霉死勒", author: "未知", tags: ["校园"], sweetness: "甜", cleanliness: "双洁", review: "校园日常", ongoing: false, favorited: false, cv_list: ["陈冠豪", "倒霉死勒"] },
+      { id: 89, title: "千杯", rating: 4.6, male_lead: "姜默 / 沈朝文", cv: "马洋 / 陈张太康", author: "静安路1号", tags: ["社会", "年下"], sweetness: "甜", cleanliness: "双洁", review: "吵真实细腻、写的太神了、cv好听", ongoing: false, favorited: true, cv_list: ["马洋", "陈张太康"] },
+      { id: 90, title: "沙雕总裁他重生了", rating: 4.1, male_lead: "秦钟越 谢重星", cv: "谷江山 / 孙路路", author: "多金少女猫", tags: ["穿越"], sweetness: "微甜 搞笑", cleanliness: "双洁", review: "娘 没看完7", ongoing: false, favorited: false, cv_list: ["谷江山", "孙路路"] },
+      { id: 91, title: "假想情人", rating: 4.0, male_lead: "高维 / 廖晨曦", cv: "江笙 / 倒霉死勒", author: "秦三见", tags: ["娱乐圈"], sweetness: "甜", cleanliness: "双洁", review: "小短剧", ongoing: false, favorited: false, cv_list: ["江笙", "倒霉死勒"] },
+      { id: 92, title: "旧情人", rating: 4.1, male_lead: "周燃 / 唐樾", cv: "赵成晨 / 孙睿扬", author: "秦三见", tags: ["社会"], sweetness: "微甜", cleanliness: "双洁", review: "🍎乱七八糟", ongoing: false, favorited: false, cv_list: ["赵成晨", "孙睿扬"] },
+      { id: 93, title: "居心不净", rating: 4.1, male_lead: "虞钦 / 宴云何", cv: "郝祥海 / 倒霉死勒", author: "池总渣", tags: ["古风"], sweetness: "微甜", cleanliness: "双洁", review: "追更10", ongoing: false, favorited: false, cv_list: ["郝祥海", "倒霉死勒"] },
+      { id: 94, title: "再世权臣", rating: 4.4, male_lead: "苏宴 / 朱贺霖 / 朱槿隚 / 沈柒 / 荆红追 / 朱栩竟 / 阿勒坦", cv: "倒霉死勒 / 余昌宇 / 赵成晨 / 马正阳 / 邓宥希 / 顺子 / 余昊威", author: "天谢", tags: ["古风", "穿越"], sweetness: "甜", cleanliness: "非洁", review: "剧情向、1V 6 爽、纯爱党心痛、前期有多爱、后期有多恨", ongoing: true, favorited: false, cv_list: ["倒霉死勒", "余昌宇", "赵成晨", "马正阳", "邓宥希", "顺子", "余昊威"] },
+      { id: 95, title: "从万米高空降临", rating: 4.2, male_lead: "陈嘉予 / 方皓", cv: "徐宇隆 / 马洋", author: "左岸", tags: ["社会"], sweetness: "甜", cleanliness: "非洁", review: "生活化、没看完9", ongoing: false, favorited: false, cv_list: ["徐宇隆", "马洋"] },
+      { id: 96, title: "你们打个游戏怎么就交到男朋友了", rating: 4.0, male_lead: "任间 / 喻清欢", cv: "文森 / 大昕", author: "伊依以翼", tags: ["电竞"], sweetness: "甜", cleanliness: "双洁", review: "生活化、小甜文", ongoing: false, favorited: false, cv_list: ["文森", "大昕"] },
+      { id: 97, title: "天潢贵胄", rating: 4.1, male_lead: "祁骁 / 百刃", cv: "弋凡 / 李轻扬", author: "漫漫何其多", tags: ["古风", "强制"], sweetness: "甜", cleanliness: "双洁", review: "古早、没看完", ongoing: false, favorited: false, cv_list: ["弋凡", "李轻扬"] },
+      { id: 98, title: "city of Angels", rating: 4.3, male_lead: "宁宇 / 阿崇", cv: "孙睿扬 / 张福正", author: "静安路1号", tags: ["社会"], sweetness: "微甜", cleanliness: "非洁", review: "细腻流畅、cv好听、追人不酸涩", ongoing: false, favorited: false, cv_list: ["孙睿扬", "张福正"] },
+      { id: 99, title: "奇洛李维斯回信", rating: 4.2, male_lead: "赵声阁陈挽", cv: "刘思岑 / 孙路路", author: "清明谷雨", tags: ["社会", "暗恋"], sweetness: "甜", cleanliness: "双洁", review: "文笔差、淡人的爱情", ongoing: false, favorited: false, cv_list: ["刘思岑", "孙路路"] },
+      { id: 100, title: "我的目标是不坐牢", rating: 4.1, male_lead: "李志 / 方牧", cv: "倒霉死勒", author: "未知", tags: ["校园", "社会"], sweetness: "甜", cleanliness: "双洁", review: "两期精简、🍎", ongoing: false, favorited: false, cv_list: ["倒霉死勒"] },
+      { id: 101, title: "铁马冰河入梦来", rating: 4.4, male_lead: "蒋梦来 / 江洛", cv: "顺子 / 倒霉死勒", author: "静水边", tags: ["古风"], sweetness: "微甜", cleanliness: "单洁", review: "追更5、cv好听", ongoing: false, favorited: false, cv_list: ["顺子", "倒霉死勒"] },
+      { id: 102, title: "岁月间", rating: 4.2, male_lead: "季钦扬 / 谢孟", cv: "北辰 / 倒霉死勒", author: "静水边", tags: ["校园"], sweetness: "甜", cleanliness: "双洁", review: "挺细腻", ongoing: false, favorited: false, cv_list: ["北辰", "倒霉死勒"] },
+      { id: 103, title: "小白杨", rating: 4.3, male_lead: "俞风城白新羽", cv: "八千里路 / 羊仔", author: "水千丞", tags: ["军队", "年下"], sweetness: "甜", cleanliness: "非洁", review: "斗嘴很甜", ongoing: false, favorited: false, cv_list: ["八千里路", "羊仔"] },
+      { id: 104, title: "深巷有光", rating: 4.6, male_lead: "江岌 / 秦青卓", cv: "兰陶倚 / 金弦", author: "潭石", tags: ["年下", "音乐"], sweetness: "甜", cleanliness: "单洁", review: "cv好听、歌巨好听", ongoing: false, favorited: true, cv_list: ["兰陶倚", "金弦"] },
+      { id: 105, title: "纸飞机", rating: 3.8, male_lead: "杨煊 / 汤君赫", cv: "史泽鲲 / 陈张太康", author: "潭石", tags: ["骨科"], sweetness: "苦", cleanliness: "双洁", review: "很苦很混乱", ongoing: false, favorited: false, cv_list: ["史泽鲲", "陈张太康"] },
+      { id: 106, title: "全世界都在等我们分手", rating: 4.2, male_lead: "傅落银林水程", cv: "赵毅 / 金弦", author: "不是风动", tags: ["双替身"], sweetness: "甜", cleanliness: "双洁", review: "刺刀替身、人设饱满、剧情差cv好", ongoing: false, favorited: false, cv_list: ["赵毅", "金弦"] },
+      { id: 107, title: "轻狂", rating: 4.1, male_lead: "寇忱 / 霍然", cv: "谷江山 / 张福正", author: "巫哲", tags: ["校园"], sweetness: "甜", cleanliness: "双洁", review: "", ongoing: false, favorited: false, cv_list: ["谷江山", "张福正"] },
+      { id: 108, title: "千秋", rating: 4.2, male_lead: "晏无师沈峤", cv: "吴磊 / 夏磊", author: "梦溪石", tags: ["古风"], sweetness: "微甜", cleanliness: "单洁", review: "", ongoing: false, favorited: false, cv_list: ["吴磊", "夏磊"] },
+      { id: 109, title: "榻上公子", rating: 3.8, male_lead: "阿诚 / 阮棠", cv: "斑马 / 倒霉死勒", author: "百鬼随行", tags: ["古风"], sweetness: "甜", cleanliness: "双洁", review: "没出完", ongoing: false, favorited: false, cv_list: ["斑马", "倒霉死勒"] },
+      { id: 110, title: "你好！今天坐放屁垫了吗", rating: 4.1, male_lead: "顾适 / 陈同焕", cv: "倒霉死勒 / 杨瑨晗", author: "未知", tags: ["大学校园"], sweetness: "甜", cleanliness: "双洁", review: "搞笑", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "杨瑨晗"] },
+      { id: 111, title: "禁止犯规", rating: 4.1, male_lead: "霍听澜 / 叶辞", cv: "赵毅 / 羊仔", author: "吕天逸", tags: ["重生"], sweetness: "甜", cleanliness: "双洁", review: "", ongoing: false, favorited: false, cv_list: ["赵毅", "羊仔"] },
+      { id: 112, title: "追尾", rating: 4.2, male_lead: "迟明尧 / 李杨骁", cv: "袁铭喆 / 马正阳", author: "潭石", tags: ["娱乐圈"], sweetness: "甜", cleanliness: "单洁", review: "", ongoing: false, favorited: false, cv_list: ["袁铭喆", "马正阳"] },
+      { id: 113, title: "一醉经年", rating: 4.1, male_lead: "宋居寒 何故", cv: "余昊威 / 刘明月", author: "水千丞", tags: ["社会"], sweetness: "微苦", cleanliness: "非洁", review: "", ongoing: false, favorited: false, cv_list: ["余昊威", "刘明月"] },
+      { id: 114, title: "理我一下", rating: 4.2, male_lead: "蒋尧 / 尹澈", cv: "景向谁依 / 邓宥希", author: "冰块儿", tags: [], sweetness: "巨甜", cleanliness: "单洁", review: "", ongoing: false, favorited: false, cv_list: ["景向谁依", "邓宥希"] },
+      { id: 115, title: "有名", rating: 4.0, male_lead: "梁渔 / 许惊蛰", cv: "魏超 / 陈家恒", author: "木更木更", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["魏超", "陈家恒"] },
+      { id: 116, title: "少汪几句", rating: 4.1, male_lead: "蒋少琰 / 汪哲", cv: "君心不雨 / 正经太郎", author: "冰块儿", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["君心不雨", "正经太郎"] },
+      { id: 117, title: "暴躁电竞大神穿成豪门后妈", rating: 4.3, male_lead: "钟侓 / 霍折寒", cv: "顺子 / 魏一凡", author: "小文旦", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["顺子", "魏一凡"] },
+      { id: 118, title: "24格的谎言", rating: 4.3, male_lead: "明铮 / 郑观语", cv: "张福正 / 商桐", author: "静安路1号", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["张福正", "商桐"] },
+      { id: 119, title: "这你都不磕", rating: 4.1, male_lead: "简明舟 / 谢景", cv: "王宁 / 张福正", author: "马户子君", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["王宁", "张福正"] },
+      { id: 120, title: "你就当我死了吧", rating: 3.9, male_lead: "陆无期 / 周子诺", cv: "顺子 / 王宁", author: "原创", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["顺子", "王宁"] },
+      { id: 121, title: "关山月", rating: 4.2, male_lead: "元徵 / 岑夜阑", cv: "云惟一 / 孙睿扬", author: "花卷", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["云惟一", "孙睿扬"] },
+      { id: 122, title: "漂亮朋友", rating: 4.1, male_lead: "李殊 / 沈宜游", cv: "吴磊 / 姜广涛", author: "卡比丘", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["吴磊", "姜广涛"] },
+      { id: 123, title: "腹黑和腹黑的终极对决", rating: 4.1, male_lead: "戚屿 / 傅延昇", cv: "吴磊 / 赵乾景", author: "羲和清零", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["吴磊", "赵乾景"] },
+      { id: 124, title: "二流货色", rating: 4.2, male_lead: "段灼 / 宋听", cv: "陈冠豪 / 顾辰", author: "尾灯", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["陈冠豪", "顾辰"] },
+      { id: 125, title: "好雨知时节", rating: 3.8, male_lead: "顾承风 / 时雨", cv: "倒霉死勒 / 刘明月", author: "白白白", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "刘明月"] },
+      { id: 126, title: "折枝", rating: 4.3, male_lead: "段凌 / 陆修文", cv: "金弦 / 谷江山", author: "困倚危楼", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["金弦", "谷江山"] },
+      { id: 127, title: "哎我刀呢", rating: 4.3, male_lead: "纪锴 / 黎未都", cv: "吴磊 / 赵乾景", author: "橙子雨", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["吴磊", "赵乾景"] },
+      { id: 128, title: "黄金笼", rating: 3.9, male_lead: "牧羽 / 牧汉霄", cv: "郑希 / 马正阳", author: "夜很贫瘠", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["郑希", "马正阳"] },
+      { id: 129, title: "未知传闻", rating: 4.0, male_lead: "许未 / 陈远闻", cv: "陈冠豪 / 袁铭喆", author: "江冉遗", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["陈冠豪", "袁铭喆"] },
+      { id: 130, title: "粉黛", rating: 4.0, male_lead: "李柏奚 / 程平", cv: "马正阳 / 路知行", author: "七英俊", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["马正阳", "路知行"] },
+      { id: 131, title: "被迫替身", rating: 4.1, male_lead: "赵雨轩 / 李安泽", cv: "赵成晨 / 陈张太康", author: "问陆", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["赵成晨", "陈张太康"] },
+      { id: 132, title: "失忆后死对头成了我男朋友", rating: 4.4, male_lead: "商玦 / 陆屿行", cv: "倒霉死勒 / 文森", author: "祝麟", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "文森"] },
+      { id: 133, title: "初恋赔付", rating: 3.8, male_lead: "江砚 / 徐期", cv: "倒霉死勒 / 文森", author: "月半丁", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["倒霉死勒", "文森"] },
+      { id: 134, title: "谷围南亭", rating: 3.9, male_lead: "高影 / 瓜尔佳・胤霆", cv: "边江 / 陈张太康", author: "墨飞", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["边江", "陈张太康"] },
+      { id: 135, title: "主要是他给的钱实在太多了", rating: 4.1, male_lead: "周子轶 / 严修济", cv: "邓宥希 / DK", author: "荒木泽代", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["邓宥希", "DK"] },
+      { id: 136, title: "偶然相爱", rating: 4.2, male_lead: "周琰 / 梁锐希", cv: "刘琮 / 苏尚卿", author: "羲和清零", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["刘琮", "苏尚卿"] },
+      { id: 137, title: "暗火", rating: 3.9, male_lead: "陆迟歇 / 凌灼", cv: "赵毅 / 马正阳", author: "白芥子", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["赵毅", "马正阳"] },
+      { id: 138, title: "我为你翻山越岭", rating: 4.2, male_lead: "邵明音 / 梁真", cv: "谷江山 / 马正阳", author: "小合鸽鸟子", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["谷江山", "马正阳"] },
+      { id: 139, title: "完美无缺", rating: 3.8, male_lead: "文家宁 / 陆进朗", cv: "金弦 / 赵成晨", author: "金刚圈", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["金弦", "赵成晨"] },
+      { id: 140, title: "心眼", rating: 4.3, male_lead: "梁承 / 乔苑林", cv: "文森 / 陈张太康", author: "北南", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["文森", "陈张太康"] },
+      { id: 141, title: "重生之扫墓", rating: 4.0, male_lead: "夏兆柏 / 简逸", cv: "顺子 / 孙睿扬", author: "吴沉水", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["顺子", "孙睿扬"] },
+      { id: 142, title: "妒烈成性", rating: 4.0, male_lead: "卫瓒 / 沈鸢", cv: "谷江山 / 陈张太康", author: "刑上香", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["谷江山", "陈张太康"] },
+      { id: 143, title: "带球跑后老公失忆了", rating: 4.0, male_lead: "江成和 / 肖雨", cv: "魅影之声 / 陈张太康", author: "青苔上瓦", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["魅影之声", "陈张太康"] },
+      { id: 144, title: "深欲", rating: 4.2, male_lead: "陆璟深 / 封肆", cv: "云惟一 / 顺子", author: "白芥子", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["云惟一", "顺子"] },
+      { id: 145, title: "恶性依赖", rating: 4.1, male_lead: "陈韵城 / 宁君延", cv: "路知行 / 文森", author: "金刚圈", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["路知行", "文森"] },
+      { id: 146, title: "缅因猫", rating: 4.1, male_lead: "简澜 / 程奈", cv: "赵成晨 / 倒霉死勒", author: "春枝知", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["赵成晨", "倒霉死勒"] },
+      { id: 147, title: "阎王", rating: 4.3, male_lead: "阎澄 / 纪悄", cv: "马正阳 / 苏尚卿", author: "柳满坡", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["马正阳", "苏尚卿"] },
+      { id: 148, title: "彩虹琥珀", rating: 3.8, male_lead: "晏舒望 / 郑予安", cv: "凌振赫 / 张福正", author: "静水边", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["凌振赫", "张福正"] },
+      { id: 149, title: "你再躲试试", rating: 4.0, male_lead: "陆寻 / 叶遥", cv: "云惟一 / 孙路路", author: "今闲", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["云惟一", "孙路路"] },
+      { id: 150, title: "爱情公园", rating: 4.3, male_lead: "唐既明 / 许渭尘", cv: "苏尚卿 / 郝祥海", author: "卡比丘", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["苏尚卿", "郝祥海"] },
+      { id: 151, title: "你师傅我人傻钱多", rating: 3.8, male_lead: "季小礼 / 阮风和", cv: "路知行 / 郑希", author: "莫晨欢", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["路知行", "郑希"] },
+      { id: 152, title: "穿成反派总裁小情人", rating: 4.0, male_lead: "楚诚 / 季轻舟", cv: "郭浩然 / 李轻扬", author: "林盎司", tags: [], sweetness: "", cleanliness: "", review: "", ongoing: false, favorited: false, cv_list: ["郭浩然", "李轻扬"] },
+      { id: 153, title: "金刚不坏", rating: 3.9, male_lead: "丁昭 / 程诺文", cv: "金弦 / 魏超", author: "里伞", tags: [], sweetness: "", cleanliness: "", review: "副本好听", ongoing: false, favorited: false, cv_list: ["金弦", "魏超"] },
     ];
 
     const TABS = ["全部", "收藏", "追更中"];
@@ -148,6 +287,9 @@
       const [activeTab, setActiveTab] = useState("全部");
       const [activeView, setActiveView] = useState("作品");
       const [sortBy, setSortBy] = useState("rating");
+      const [sortFav, setSortFav] = useState("rating");
+      const [sortAuthor, setSortAuthor] = useState("rating");
+      const [sortCV, setSortCV] = useState("rating");
       const [search, setSearch] = useState("");
       const [detailTarget, setDetailTarget] = useState(null);
       const [selectedAuthor, setSelectedAuthor] = useState(null);
@@ -191,28 +333,36 @@
           d.title.includes(search) || d.author.includes(search) ||
           d.male_lead.includes(search) || d.cv.includes(search)
         );
-        return list.sort((a, b) => b.rating - a.rating);
-      }, [dramas, search]);
+        return [...list].sort((a, b) => sortFav === "rating" ? b.rating - a.rating : a.title.localeCompare(b.title));
+      }, [dramas, search, sortFav]);
 
       const authorList = useMemo(() => {
-        let list = Object.entries(authorMap).sort((a, b) => b[1].length - a[1].length);
+        let list = Object.entries(authorMap);
         if (search) list = list.filter(([author, works]) =>
           author.includes(search) || works.some(w =>
             w.title.includes(search) || w.cv.includes(search)
           )
         );
+        const avg = ws => ws.reduce((s, d) => s + d.rating, 0) / ws.length;
+        if (sortAuthor === "rating") list.sort((a, b) => avg(b[1]) - avg(a[1]));
+        else if (sortAuthor === "count") list.sort((a, b) => b[1].length - a[1].length);
+        else list.sort((a, b) => a[0].localeCompare(b[0]));
         return list;
-      }, [authorMap, search]);
+      }, [authorMap, search, sortAuthor]);
 
       const cvList = useMemo(() => {
-        let list = Object.entries(cvMap).sort((a, b) => b[1].length - a[1].length);
+        let list = Object.entries(cvMap);
         if (search) list = list.filter(([cv, works]) =>
           cv.includes(search) || works.some(w =>
             w.title.includes(search) || w.author.includes(search)
           )
         );
+        const avg = ws => ws.reduce((s, d) => s + d.rating, 0) / ws.length;
+        if (sortCV === "rating") list.sort((a, b) => avg(b[1]) - avg(a[1]));
+        else if (sortCV === "count") list.sort((a, b) => b[1].length - a[1].length);
+        else list.sort((a, b) => a[0].localeCompare(b[0]));
         return list;
-      }, [cvMap, search]);
+      }, [cvMap, search, sortCV]);
 
       const avgRating = (list) => list.length ? (list.reduce((s, d) => s + d.rating, 0) / list.length).toFixed(1) : "-";
 
@@ -230,18 +380,19 @@
           }}>
             <div style={{ maxWidth: 700, margin: "0 auto" }}>
               <div style={{ marginBottom: 16 }}>
-                <div style={{ color: "#f5c880", fontSize: 22, fontWeight: 700, letterSpacing: 2 }}>🎙️ 广播剧追踪</div>
-                <div style={{ color: "#c8a878", fontSize: 12, marginTop: 2 }}>共 {dramas.length} 部 · {dramas.filter(d => d.favorited).length} 收藏 · {dramas.filter(d => d.ongoing).length} 追更</div>
+                <div style={{ color: "#f5c880", fontSize: 22, fontWeight: 700, letterSpacing: 2 }}>🎙️ 胤禛的广播宇宙</div>
+                <div style={{ color: "#c8a878", fontSize: 12, marginTop: 2 }}>共 {dramas.length} 部 · {dramas.filter(d => d.favorited).length} 收藏 · {Object.keys(cvMap).length} 位CV</div>
               </div>
 
               {/* View Tabs */}
-              <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
+              <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
                 {VIEWS.map(v => (
                   <button key={v} className="tab-btn" onClick={() => setActiveView(v)} style={{
-                    background: activeView === v ? "#f5c880" : "rgba(255,255,255,0.12)",
+                    flex: 1, background: activeView === v ? "#f5c880" : "rgba(255,255,255,0.12)",
                     color: activeView === v ? "#4a2c1a" : "#d4b896",
-                    border: "none", borderRadius: 8, padding: "5px 14px",
-                    fontSize: 13, fontWeight: activeView === v ? 700 : 400, cursor: "pointer", transition: "all 0.2s"
+                    border: "none", borderRadius: 10, padding: "10px 0",
+                    fontSize: 15, fontWeight: activeView === v ? 700 : 500, cursor: "pointer", transition: "all 0.2s",
+                    letterSpacing: 2
                   }}>{v}</button>
                 ))}
               </div>
@@ -269,6 +420,30 @@
                       background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)",
                       borderRadius: 8, padding: "5px 10px", fontSize: 12, color: "#c8a878", cursor: "pointer"
                     }}>{sortBy === "rating" ? "↓评分" : "↕名称"}</button>
+                  </div>
+                )}
+                {activeView === "收藏" && (
+                  <div style={{ display: "flex", gap: 6 }}>
+                    <button onClick={() => setSortFav(s => s === "rating" ? "title" : "rating")} style={{
+                      background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.15)",
+                      borderRadius: 8, padding: "5px 10px", fontSize: 12, color: "#c8a878", cursor: "pointer"
+                    }}>{sortFav === "rating" ? "↓评分" : "↕名称"}</button>
+                  </div>
+                )}
+                {(activeView === "作者" || activeView === "CV") && (
+                  <div style={{ display: "flex", gap: 6 }}>
+                    {[["rating","↓均分"],["count","↓数量"],["name","↕名称"]].map(([k,label]) => {
+                      const cur = activeView === "作者" ? sortAuthor : sortCV;
+                      const setter = activeView === "作者" ? setSortAuthor : setSortCV;
+                      return (
+                        <button key={k} className="tab-btn" onClick={() => setter(k)} style={{
+                          background: cur === k ? "rgba(245,200,128,0.3)" : "rgba(255,255,255,0.08)",
+                          color: cur === k ? "#f5c880" : "#c8a878",
+                          border: cur === k ? "1px solid #f5c880" : "1px solid rgba(255,255,255,0.15)",
+                          borderRadius: 8, padding: "5px 10px", fontSize: 12, cursor: "pointer"
+                        }}>{label}</button>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -325,7 +500,7 @@
                 {filteredFavorites.length === 0 && (
                   <div style={{ textAlign: "center", padding: "60px 0", color: "#b09070" }}>{search ? "无匹配收藏" : "暂无收藏"}</div>
                 )}
-                {filteredFavorites.map(drama => (
+                {filteredFavorites.map((drama, idx) => (
                   <div key={drama.id} className="drama-card" style={{
                     background: "#fdf7ee", borderRadius: 14, padding: "14px 16px",
                     boxShadow: "0 2px 12px rgba(120,60,20,0.1)", border: "1px solid #e8d5b8",
@@ -334,6 +509,7 @@
                     <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
                       <div style={{ flex: 1, minWidth: 0 }}>
                         <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap", marginBottom: 4 }}>
+                          {sortFav === "rating" && <span style={{ fontSize: idx < 3 ? 15 : 12, fontWeight: 700, color: idx === 0 ? "#e8a838" : idx === 1 ? "#a0a0a0" : idx === 2 ? "#c87040" : "#b09070", fontFamily: "'DM Mono', monospace", minWidth: 20 }}>{idx < 3 ? ["🥇","🥈","🥉"][idx] : idx + 1}</span>}
                           <span style={{ fontSize: 16, fontWeight: 700, color: "#3a2010" }}>{drama.title}</span>
                           {drama.ongoing && <OngoingBadge />}
                           <span style={{ color: "#e84040", fontSize: 16 }}>♥</span>
@@ -425,12 +601,15 @@
                     {authorList.length === 0 && (
                       <div style={{ textAlign: "center", padding: "60px 0", color: "#b09070" }}>无匹配作者</div>
                     )}
-                    {authorList.map(([author, works]) => (
+                    {authorList.map(([author, works], idx) => (
                       <div key={author} className="drama-card" onClick={() => setSelectedAuthor(author)} style={{
                         background: "#fdf7ee", borderRadius: 14, padding: "16px 18px",
                         boxShadow: "0 2px 12px rgba(120,60,20,0.1)", cursor: "pointer",
                         border: "1px solid #e8d5b8", display: "flex", alignItems: "center", gap: 14
                       }}>
+                        <div style={{ width: 24, textAlign: "center", flexShrink: 0, fontSize: idx < 3 ? 16 : 13, fontWeight: 700, color: idx === 0 ? "#e8a838" : idx === 1 ? "#a0a0a0" : idx === 2 ? "#c87040" : "#b09070", fontFamily: "'DM Mono', monospace" }}>
+                          {idx < 3 ? ["🥇","🥈","🥉"][idx] : idx + 1}
+                        </div>
                         <Avatar name={author} gradients={AUTHOR_GRADIENTS} size={48} />
                         <div style={{ flex: 1 }}>
                           <div style={{ fontWeight: 700, fontSize: 16, color: "#3a2010", marginBottom: 4 }}>{author}</div>
@@ -513,12 +692,15 @@
                     {cvList.length === 0 && (
                       <div style={{ textAlign: "center", padding: "60px 0", color: "#b09070" }}>无匹配CV</div>
                     )}
-                    {cvList.map(([cv, works]) => (
+                    {cvList.map(([cv, works], idx) => (
                       <div key={cv} className="drama-card" onClick={() => setSelectedCV(cv)} style={{
                         background: "#fdf7ee", borderRadius: 14, padding: "16px 18px",
                         boxShadow: "0 2px 12px rgba(120,60,20,0.1)", cursor: "pointer",
                         border: "1px solid #e8d5b8", display: "flex", alignItems: "center", gap: 14
                       }}>
+                        <div style={{ width: 24, textAlign: "center", flexShrink: 0, fontSize: idx < 3 ? 16 : 13, fontWeight: 700, color: idx === 0 ? "#e8a838" : idx === 1 ? "#a0a0a0" : idx === 2 ? "#c87040" : "#b09070", fontFamily: "'DM Mono', monospace" }}>
+                          {idx < 3 ? ["🥇","🥈","🥉"][idx] : idx + 1}
+                        </div>
                         <Avatar name={cv} gradients={CV_GRADIENTS} size={48} />
                         <div style={{ flex: 1 }}>
                           <div style={{ fontWeight: 700, fontSize: 16, color: "#1a3a4a", marginBottom: 4 }}>{cv}</div>
